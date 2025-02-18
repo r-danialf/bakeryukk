@@ -268,7 +268,7 @@ main {
             }
 
             .moreinfo {
-                .customersideinfo {
+                .customersideinfo, .transactionsideinfo {
                     padding: 0.2em;
 
                     td {

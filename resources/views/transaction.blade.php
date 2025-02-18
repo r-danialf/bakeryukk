@@ -49,11 +49,13 @@
                 @if(isset($transaction))
                     <div class="information">
                         <div class="paddedinfo">
-                            <h1>{{ $transaction->transactionDate }}</h1>
-                            <hr>
                             <div class="moreinfo">
                                 <div class="transactionsideinfo">
                                     <table>
+                                        <tr>
+                                            <td><b>Tanggal Transaksi:</b></td>
+                                            <td>{{ $transaction->transactionDate }}</td>
+                                        </tr>
                                         <tr>
                                             <td><b>Total Harga:</b></td>
                                             <td>{{ $transaction->totalPrice }}</td>

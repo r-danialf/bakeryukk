@@ -28,7 +28,7 @@ Route::get('customer/{id}', function ($id) {
     $customer = Customer::find($id);
 
     if (!$customer) {
-        return redirect('/')->with('error', 'Pembeli tidak ditemukan.');
+        return redirect('customer')->with('error', 'Pembeli tidak ditemukan.');
     }
 
     return view('customer', compact('customer'));
@@ -42,7 +42,7 @@ Route::get('product/{id}', function ($id) {
     $product = Product::find($id);
 
     if (!$product) {
-        return redirect('/')->with('error', 'Product not found');
+        return redirect('product')->with('error', 'Product not found');
     }
 
     return view('product', compact('product'));
@@ -56,7 +56,7 @@ Route::get('transaction/{id}', function ($id) {
     $transaction = Transaction::find($id);
 
     if (!$transaction) {
-        return redirect('/')->with('error', 'Transaksi tidak ditemukan.');
+        return redirect('transaction')->with('error', 'Transaksi tidak ditemukan.');
     }
 
     return view('transaction', compact('transaction'));
