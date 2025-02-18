@@ -1,0 +1,325 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    background-color: rgb(222, 226, 247);
+}
+
+.topnav {
+    height: 2em;
+    padding: 1em;
+    background-color: rgb(46, 43, 61);
+    box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.329);
+
+    display: flex;
+    justify-content: space-between;
+
+    * {
+        display: inline-block;
+    }
+
+    div {
+        display: flex;
+        align-items: center;
+    }
+
+    .tn-title {
+        color: white;
+        padding: 0;
+        margin: 0;
+        font-weight: 400;
+        font-size: x-large;
+    }
+
+    .tn-separator {
+        height: 20px;
+        width: 2px;
+        background-color: rgba(255, 255, 255, 0.212);
+        margin: 0 20px;
+    }
+
+    .tn-navlink {
+        display: flex;
+        align-items: center;
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2px 0;
+            display: flex;
+            gap: 5px;
+        }
+
+        a {
+            color: white;
+            padding: 6px 12px;
+            text-decoration: none;
+            border: 2px solid rgb(46, 43, 61);
+            border-radius: 6px;
+
+            &:hover {
+                color: rgb(168, 143, 238);
+                background-color: rgba(0, 0, 0, 0.308);
+                cursor: pointer;
+            }
+        }
+
+        a[chosen] {
+            color: rgb(160, 131, 241);
+            background-color: rgba(0, 0, 0, 0.534);
+        }
+    }
+}
+
+main {
+    display: flex;
+
+    .mainlist {
+        flex: 5;
+
+        .maincontrols {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1em;
+
+            div, form  {
+                flex: 1;
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        .createbtn {
+            --updatecolor: rgb(92, 37, 245);
+            padding: 0 2em 0 2em;
+            background-color: var(--updatecolor);
+            border: 2px solid var(--updatecolor);
+            border-radius: 5px;
+            color: rgb(255, 255, 255);
+            box-shadow: 0 4px 8px -3px rgba(0, 0, 0, 0.329);
+        }
+
+        .search {
+            padding: 0.5em;
+            height: 2em;
+            width: 100%;
+            border: 2px solid rgba(75, 75, 75, 0.438);
+            font-size: medium;
+        }
+    }
+
+    button {
+        font-size:large;
+        margin: 0.5em;
+        min-height: 2.5em;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .productlist {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        .product {
+            margin: 0.5em;
+            overflow: hidden;
+            flex-basis: calc(33.33% - 1em);
+            background-color:rgb(237, 235, 247);
+            border: 2px solid rgb(245, 245, 245);
+            border-radius: 6px;
+            box-shadow: 0 4px 8px -3px rgba(0, 0, 0, 0.329);
+            box-sizing: border-box;
+            cursor: pointer;
+
+            * {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            span {
+                padding: 0.6em;
+            }
+
+            .productname {
+                background-color: rgb(245, 245, 245);
+
+                img {
+                    width: 50px;
+                    height: 50px;
+                    display: inline-block;
+                }
+
+            }
+
+            .productinfo {
+                span {
+                    color:rgba(0, 0, 0, 0.678);
+                }
+            }
+
+        }
+    }
+
+    .customerlist, .transactionlist {
+        padding:  0 1em 1em 1em;
+
+        table {
+            width: 99%;
+
+            td {
+                padding: 0.4em;
+                vertical-align: top;
+            }
+
+            thead td {
+                border-bottom: 4px solid rgba(0, 0, 0, 0.644);
+            }
+
+            tbody {
+                tr:hover {
+                    background-color: rgba(51, 36, 104, 0.192);
+                }
+
+                td {
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.336);
+                    word-break: break-word; /* Breaks long words */
+                    white-space: normal;
+                    cursor: pointer;
+                }
+
+            }
+        }
+    }
+
+    .sideinfo {
+        flex: 2;
+        min-height: calc(100vh - 4em);
+        background-color: rgb(241, 241, 241);
+        box-shadow: -4px 0 6px -2px rgba(0, 0, 0, 0.329);
+
+
+        .updatebtn {
+            --updatecolor: rgb(245, 103, 37);
+            background-color: var(--updatecolor);
+            border: 2px solid var(--updatecolor);
+            border-radius: 5px;
+            color: rgb(255, 255, 255)
+        }
+
+        .confirmbtn {
+            --cancelcolor: rgb(44, 146, 61);
+            background-color: var(--cancelcolor);
+            border: 2px solid var(--cancelcolor);
+            border-radius: 5px;
+            color: rgb(255, 255, 255);
+        }
+
+        .cancelbtn {
+            --cancelcolor: rgb(124, 117, 113);
+            background-color: var(--cancelcolor);
+            border: 2px solid var(--cancelcolor);
+            border-radius: 5px;
+            color: rgb(255, 255, 255);
+        }
+
+        .deletebtn {
+            --deletecolor: rgb(231, 37, 37);
+            background-color: var(--deletecolor);
+            border: 2px solid var(--deletecolor);
+            border-radius: 5px;
+            color: rgb(255, 255, 255);
+        }
+
+        .crudbuttonsect {
+            display: flex;
+
+            button {
+                flex-basis: calc(50% - 1em);
+            }
+        }
+
+        img {
+            width: 100%;
+            height: 20vh;
+            object-fit: cover;
+        }
+
+        .paddedinfo {
+            padding: 1em;
+        }
+
+        .information {
+            .moreinfo-flex {
+                display: flex;
+
+                .productsideinfo {
+                    flex: 1;
+                    color:rgba(18, 11, 83, 0.959);
+                }
+            }
+
+            .moreinfo {
+                .customersideinfo {
+                    padding: 0.2em;
+
+                    td {
+                        vertical-align: top;
+                        padding: 0em 0.3em 0.5em 0.3em;
+                    }
+                }
+            }
+
+            p {
+                padding: 0;
+                margin: 0;
+            }
+
+            h1 {
+                margin: 0 0 0.7em 0;
+            }
+
+            h2 {
+                padding: 0;
+                margin: 0.1em 0 0.5em 0;
+            }
+
+            button {
+                flex-basis: calc(50% - 1em);
+            }
+        }
+
+        .infocrud, .createobj {
+
+            label {
+                color: rgb(19, 35, 124);
+                display: block;
+                font-size: large;
+                margin-top: 0.5em;
+                margin-bottom: 5px;
+            }
+
+            input {
+                width: 95%;
+                height: 1.8em;
+                border: 1px solid rgba(19, 35, 124, 0.37);
+                border-radius: 5px;
+                padding: 5px;
+                font-size: medium;
+            }
+
+            img {
+                width: 50%;
+                height: 50%;
+            }
+        }
+    }
+}
