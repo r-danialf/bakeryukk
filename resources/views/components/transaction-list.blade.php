@@ -13,8 +13,8 @@
             <tr onclick="checkTransaction({{ $transaction->id }})">
                 <td>{{ $transaction->id }}</td>
                 <td>{{ $transaction->transactionDate }}</td>
-                <td>{{ $transaction->totalPrice }}</td>
-                <td>{{ $transaction->customerId }}</td>
+                <td>Rp{{ $transaction->totalPrice }}</td>
+                <td>{{ $transaction->customer->customerName }}</td>
             </tr>
             @endforeach
         </tbody>

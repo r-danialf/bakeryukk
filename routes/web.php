@@ -2,12 +2,15 @@
 
 use App\Models\Product;
 use App\Models\Customer;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\TransactionController;
 
 Route::resource('products', ProductController::class);
 Route::resource('customers', CustomerController::class);
+Route::resource('transactions', TransactionController::class);
 
 Route::get('/', function () {
     return view('dashboard');
@@ -47,4 +50,14 @@ Route::get('product/{id}', function ($id) {
 
 Route::get('transaction', function () {
     return view('transaction');
+});
+
+Route::get('transaction/{id}', function ($id) {
+    $transaction = Transaction::find($id);
+
+    if (!$transaction) {
+        return redirect('/')->with('error', 'Transaksi tidak ditemukan.');
+    }
+
+    return view('transaction', compact('transaction'));
 });

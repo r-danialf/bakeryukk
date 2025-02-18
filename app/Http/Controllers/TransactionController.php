@@ -3,63 +3,48 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'transactionDate' => 'required|date',
+            'totalPrice' => 'required|numeric',
+            'customerId' => 'required|exists:customers,id',
+        ]);
+
+        Transaction::create([
+            'transactionDate' => $request->transactionDate,
+            'totalPrice' => $request->totalPrice,
+            'customerId' => $request->customerId,
+        ]);
+
+        return redirect(url('/transaction'))->with('success', 'Transaksi berhasil dibuat.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Transaction $transaction)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Transaction $transaction)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Transaction $transaction)
     {
-        //
+        $request->validate([
+            'transactionDate' => 'required|date',
+            'totalPrice' => 'required|numeric',
+            'customerId' => 'required|exists:customers,id',
+        ]);
+
+        $transaction->update([
+            'transactionDate' => $request->transactionDate,
+            'totalPrice' => $request->totalPrice,
+            'customerId' => $request->customerId,
+        ]);
+
+        return redirect()->back()->with('success', 'Transaksi berhasil diubah.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Transaction $transaction)
     {
-        //
+        $transaction->delete();
+        return redirect(url('/transaction'))->with('success', 'Transaksi berhasil dihapus.');
     }
 }
