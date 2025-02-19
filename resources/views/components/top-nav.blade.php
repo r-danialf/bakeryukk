@@ -4,8 +4,8 @@
         <div class="tn-separator"></div>
         <div class="tn-navlink">
             <ul>
-                <li><a href="/"
-                    @if(request()->is('/')) chosen @endif>Dashboard</a></li>
+                <li><a href="/dashboard"
+                    @if(request()->is('dashboard')) chosen @endif>Dashboard</a></li>
                 <li><a href="/cashier"
                     @if(request()->is('cashier')) chosen @endif>Kasir</a></li>
                 <li><a href="/customer"

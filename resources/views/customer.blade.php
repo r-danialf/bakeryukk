@@ -50,6 +50,7 @@
                 @if(isset($customer))
                     <div class="information">
                         <div class="paddedinfo">
+                            <p>ID Pelanggan: {{ $customer->id }}</p>
                             <h1>{{ $customer->customerName }}</h1>
                             <hr>
                             <div class="moreinfo">

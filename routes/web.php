@@ -12,7 +12,7 @@ Route::resource('products', ProductController::class);
 Route::resource('customers', CustomerController::class);
 Route::resource('transactions', TransactionController::class);
 
-Route::get('/', function () {
+Route::get('dashboard', function () {
     return view('dashboard');
 });
 

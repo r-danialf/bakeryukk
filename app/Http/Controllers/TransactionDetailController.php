@@ -7,59 +7,39 @@ use Illuminate\Http\Request;
 
 class TransactionDetailController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'money' => 'required|numeric|min:0',
+            'customerId' => 'required|exists:customers,id',
+            'cart' => 'required|array',
+        ]);
+
+        $totalPrice = 0;
+        foreach ($request->cart as $item) {
+            $totalPrice += $item['price'] * $item['quantity'];
+        }
+
+        if ($request->money < $totalPrice) {
+            return redirect()->back()->with('error', 'Nominal uang kurang!');
+        }
+
+        $transaction = Transaction::create([
+            'transactionDate' => now(),
+            'totalPrice' => $totalPrice,
+            'customerId' => $request->customerId,
+        ]);
+
+        foreach ($request->cart as $item) {
+            TransactionDetail::create([
+                'transactionId' => $transaction->id,
+                'productId' => $item['id'],
+                'productQuantity' => $item['quantity'],
+                'subTotal' => $item['price'] * $item['quantity'],
+            ]);
+        }
+
+        return redirect(url('/transaction'))->with('success', 'Transaksi berhasil dibuat.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(TransactionDetail $transactionDetail)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(TransactionDetail $transactionDetail)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, TransactionDetail $transactionDetail)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(TransactionDetail $transactionDetail)
-    {
-        //
-    }
 }

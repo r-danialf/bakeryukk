@@ -123,6 +123,15 @@ main {
         }
     }
 
+    select {
+        font-size:large;
+        border: 1px solid rgba(19, 35, 124, 0.37);
+        border-radius: 5px;
+        padding: 5px;
+        min-height: 2.5em;
+        width: 98%;
+    }
+
     .productlist {
         display: flex;
         flex-direction: row;
@@ -206,7 +215,6 @@ main {
         background-color: rgb(241, 241, 241);
         box-shadow: -4px 0 6px -2px rgba(0, 0, 0, 0.329);
 
-
         .updatebtn {
             --updatecolor: rgb(245, 103, 37);
             background-color: var(--updatecolor);
@@ -216,9 +224,9 @@ main {
         }
 
         .confirmbtn {
-            --cancelcolor: rgb(44, 146, 61);
-            background-color: var(--cancelcolor);
-            border: 2px solid var(--cancelcolor);
+            --confirmcolor: rgb(44, 146, 61);
+            background-color: var(--confirmcolor);
+            border: 2px solid var(--confirmcolor);
             border-radius: 5px;
             color: rgb(255, 255, 255);
         }
@@ -319,6 +327,216 @@ main {
             img {
                 width: 50%;
                 height: 50%;
+            }
+        }
+    }
+}
+
+
+.cashier {
+    display: flex;
+
+    .quantity-control {
+        display: flex;
+        align-items: center;
+        user-select: none;
+
+        button {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        span {
+            margin: 0 10px;
+            min-width: 20px;
+            text-align: center;
+        }
+    }
+
+    .c-product-list {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        user-select: none;
+        background-color: white;
+        min-height: calc(100vh - 4em);
+        box-shadow: 4px 0 6px -2px rgba(0, 0, 0, 0.329);
+
+        .productlist {
+            .product {
+                display: flex;
+                margin: 0.5em;
+                overflow: hidden;
+                background-color:rgb(245, 245, 245);
+                border: 2px solid rgb(245, 245, 245);
+                border-radius: 6px;
+                box-shadow: 0 4px 8px -3px rgba(0, 0, 0, 0.329);
+                box-sizing: border-box;
+                cursor: pointer;
+                justify-content: space-between;
+
+                .productname {
+                    display: flex;
+                    font-size: medium;
+
+                    * {
+                        font-weight: 400;
+                    }
+
+                    span {
+                        margin: 0 0.5em;
+                    }
+                }
+
+                .productinfo {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+
+                    margin-right: 1em;
+
+                    i {
+                        font-size: medium;
+                        color: rgb(20, 20, 43);
+                    }
+
+                    b {
+                        font-size: small;
+                        color: rgb(36, 12, 124);
+                        font-weight: normal;
+                    }
+                }
+            }
+
+            img {
+                width: 50px;
+                height: 50px;
+                object-fit: cover;
+            }
+
+        }
+    }
+
+    .c-menu {
+        flex: 3;
+        margin: 0.5em;
+        padding: 0.5em;
+
+        .table-menu {
+            height: 55vh;
+            overflow-y: auto;
+            background-color: #4947d142;
+            padding: 0.5em;
+            border: 2px solid rgba(0, 0, 0, 0.596);
+            border-radius: 4px;
+        }
+
+        .bottomcashier {
+            display: flex;
+
+            div {
+                flex: 1;
+                margin: 0.2em;
+            }
+
+            h2 {
+                padding: 0;
+                margin: 0.2em 0;
+            }
+
+            .harga div {
+                margin: 0.8em 1em 0.8em 0;
+                padding: 0.4em 1em;
+                background-color: rgba(37, 37, 37, 0.137);
+            }
+
+            .tombolcashier {
+                margin: 0.8em 0 0.8em 1em;
+                padding: 0.4em 1em;
+            }
+
+            select {
+                font-size:large;
+                border: 1px solid rgba(19, 35, 124, 0.37);
+                border-radius: 5px;
+                padding: 5px;
+                min-height: 2.5em;
+                width: 98%;
+            }
+
+            input {
+                width: 95%;
+                height: 1.8em;
+                border: 1px solid rgba(19, 35, 124, 0.37);
+                border-radius: 5px;
+                padding: 5px;
+                font-size: medium;
+            }
+
+            label {
+                color: rgb(19, 35, 124);
+                display: block;
+                font-size: large;
+                margin-top: 0.5em;
+                margin-bottom: 5px;
+            }
+
+            .confirmbtn {
+                --confirmcolor: rgb(44, 146, 61);
+                background-color: var(--confirmcolor);
+                border: 2px solid var(--confirmcolor);
+                border-radius: 5px;
+                color: rgb(255, 255, 255);
+            }
+
+            .cancelbtn {
+                --cancelcolor: rgb(124, 117, 113);
+                background-color: var(--cancelcolor);
+                border: 2px solid var(--cancelcolor);
+                border-radius: 5px;
+                color: rgb(255, 255, 255);
+            }
+
+            button {
+                font-size:large;
+                width: 100%;
+                height: 3em;
+                margin: 0.4em 0;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        table {
+            width: 99%;
+            user-select: none;
+
+            td {
+                padding: 0.4em;
+                vertical-align: top;
+            }
+
+            thead td {
+                border-bottom: 4px solid rgba(0, 0, 0, 0.644);
+            }
+
+            tbody {
+                tr:hover {
+                    background-color: rgba(51, 36, 104, 0.192);
+                }
+
+                td {
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.336);
+                    word-break: break-word;
+                    white-space: normal;
+                    cursor: pointer;
+                }
+
             }
         }
     }
