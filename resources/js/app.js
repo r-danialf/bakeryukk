@@ -9,9 +9,10 @@ function addToCashier(id, name, price) {
         cart[id] = { id, name, price, quantity: 1 };
     }
     renderTable();
+    getSpare();
 }
 
-function updateQuantity(id, change) {
+window.updateQuantity = function (id, change) {
     if (cart[id]) {
         cart[id].quantity += change;
         if (cart[id].quantity <= 0) {
@@ -21,9 +22,10 @@ function updateQuantity(id, change) {
     }
 }
 
-function removeFromCashier(id) {
+window.removeFromCashier = function (id) {
     delete cart[id];
     renderTable();
+    getSpare();
 }
 
 function renderTable() {
@@ -37,26 +39,26 @@ function renderTable() {
         const totalPrice = item.price * item.quantity;
         total += totalPrice;
         const row = `
-                        <tr>
-                            <td>${index}</td>
-                            <td>${item.id}</td>
-                            <td>${item.name}</td>
-                            <td>Rp${item.price}</td>
-                            <td>
-                                <div class="quantity-control">
-                                    <button onclick="updateQuantity('${id}', -1)">-</button>
-                                    <span>${item.quantity}</span>
-                                    <button onclick="updateQuantity('${id}', 1)">+</button>
-                                </div>
-                            </td>
-                            <td>Rp${totalPrice}</td>
-                            <td>
-                                <div class="quantity-control">
-                                    <button onclick="removeFromCashier('${id}')">Hapus</button>
-                                </div>
-                            </td>
-                        </tr>
-                    `;
+            <tr>
+                <td>${index}</td>
+                <td>${item.id}</td>
+                <td>${item.name}</td>
+                <td>Rp${item.price}</td>
+                <td>
+                    <div class="quantity-control">
+                        <button type="button" onclick="updateQuantity('${id}', -1)">-</button>
+                        <span>${item.quantity}</span>
+                        <button type="button" onclick="updateQuantity('${id}', 1)">+</button>
+                    </div>
+                </td>
+                <td>Rp${totalPrice}</td>
+                <td>
+                    <div class="quantity-control">
+                        <button type="button" onclick="removeFromCashier('${id}')">Hapus</button>
+                    </div>
+                </td>
+            </tr>
+        `;
         tbody.innerHTML += row;
         index++;
     }
@@ -70,6 +72,22 @@ document.querySelectorAll(".product").forEach(product => {
         const price = parseInt(this.querySelector(".productinfo span i").innerText.replace("Rp", ""));
         addToCashier(id, name, price);
     });
+});
+
+function getSpare () {
+    const getmoney = document.getElementById("money");
+    const sparebox = document.getElementById("spare-change");
+
+    const money = parseFloat(getmoney.value) || 0;
+    const total = parseFloat(document.getElementById("grand-total").innerText) || 0;
+    const change = money - total;
+    sparebox.innerText = change >= 0 ? change : 0;
+}
+
+document.getElementById('money').addEventListener('input', getSpare);
+
+document.getElementById('transaction-form').addEventListener('submit', function() {
+    document.getElementById('cart-data').value = JSON.stringify(cart);
 });
 
 window.showUpdateMenu = function (state) {

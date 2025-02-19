@@ -7,39 +7,56 @@ use Illuminate\Http\Request;
 
 class TransactionDetailController extends Controller
 {
+    /**
+     * Store a newly created transaction detail in storage.
+     */
     public function store(Request $request)
     {
         $request->validate([
-            'money' => 'required|numeric|min:0',
-            'customerId' => 'required|exists:customers,id',
-            'cart' => 'required|array',
+            'transactionId'   => 'required|exists:transactions,id',
+            'productId'       => 'required|exists:products,id',
+            'productQuantity' => 'required|integer|min:1',
+            'subTotal'        => 'required|numeric|min:0',
         ]);
 
-        $totalPrice = 0;
-        foreach ($request->cart as $item) {
-            $totalPrice += $item['price'] * $item['quantity'];
-        }
-
-        if ($request->money < $totalPrice) {
-            return redirect()->back()->with('error', 'Nominal uang kurang!');
-        }
-
-        $transaction = Transaction::create([
-            'transactionDate' => now(),
-            'totalPrice' => $totalPrice,
-            'customerId' => $request->customerId,
+        TransactionDetail::create([
+            'transactionId'   => $request->transactionId,
+            'productId'       => $request->productId,
+            'productQuantity' => $request->productQuantity,
+            'subTotal'        => $request->subTotal,
         ]);
 
-        foreach ($request->cart as $item) {
-            TransactionDetail::create([
-                'transactionId' => $transaction->id,
-                'productId' => $item['id'],
-                'productQuantity' => $item['quantity'],
-                'subTotal' => $item['price'] * $item['quantity'],
-            ]);
-        }
-
-        return redirect(url('/transaction'))->with('success', 'Transaksi berhasil dibuat.');
+        return redirect(url('/transaction'))->with('success', 'Detail transaksi berhasil dibuat.');
     }
 
+    /**
+     * Update the specified transaction detail in storage.
+     */
+    public function update(Request $request, TransactionDetail $transactionDetail)
+    {
+        $request->validate([
+            'transactionId'   => 'required|exists:transactions,id',
+            'productId'       => 'required|exists:products,id',
+            'productQuantity' => 'required|integer|min:1',
+            'subTotal'        => 'required|numeric|min:0',
+        ]);
+
+        $transactionDetail->update([
+            'transactionId'   => $request->transactionId,
+            'productId'       => $request->productId,
+            'productQuantity' => $request->productQuantity,
+            'subTotal'        => $request->subTotal,
+        ]);
+
+        return redirect()->back()->with('success', 'Detail transaksi berhasil diubah.');
+    }
+
+    /**
+     * Remove the specified transaction detail from storage.
+     */
+    public function destroy(TransactionDetail $transactionDetail)
+    {
+        $transactionDetail->delete();
+        return redirect(url('/transaction'))->with('success', 'Detail transaksi berhasil dihapus.');
+    }
 }

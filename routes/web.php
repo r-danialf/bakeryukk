@@ -12,6 +12,8 @@ Route::resource('products', ProductController::class);
 Route::resource('customers', CustomerController::class);
 Route::resource('transactions', TransactionController::class);
 
+Route::post('/transaction', [TransactionController::class, 'store'])->name('transaction.store');
+
 Route::get('dashboard', function () {
     return view('dashboard');
 });
