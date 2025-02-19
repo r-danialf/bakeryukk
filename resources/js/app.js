@@ -28,6 +28,16 @@ window.removeFromCashier = function (id) {
     getSpare();
 }
 
+window.cleanCashier = function () {
+    cart = {};
+    document.getElementById("money").value = "";
+
+    renderTable();
+    getSpare();
+
+
+}
+
 function renderTable() {
     const tbody = document.getElementById("cashier-body");
     tbody.innerHTML = "";
@@ -84,11 +94,13 @@ function getSpare () {
     sparebox.innerText = change >= 0 ? change : 0;
 }
 
-document.getElementById('money').addEventListener('input', getSpare);
+if (document.getElementById('money')) {
+    document.getElementById('money').addEventListener('input', getSpare);
+    document.getElementById('transaction-form').addEventListener('submit', function() {
+        document.getElementById('cart-data').value = JSON.stringify(cart);
+    });
+}
 
-document.getElementById('transaction-form').addEventListener('submit', function() {
-    document.getElementById('cart-data').value = JSON.stringify(cart);
-});
 
 window.showUpdateMenu = function (state) {
     document.querySelectorAll('.information').forEach(element => {

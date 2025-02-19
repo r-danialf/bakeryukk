@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -16,42 +18,46 @@ class TransactionController extends Controller
             'cart'       => 'required',
         ]);
 
-        // Decode the cart JSON sent from the form
         $cart = json_decode($request->cart, true);
         if (!$cart || count($cart) === 0) {
             return redirect()->back()->withErrors('Cart is empty.');
         }
 
-        // Calculate the total from the cart
         $totalPrice = 0;
         foreach ($cart as $item) {
             $totalPrice += $item['price'] * $item['quantity'];
         }
 
-        // Check if provided money is sufficient
         if ($request->money < $totalPrice) {
             return redirect()->back()->withErrors('Uang tidak mencukupi.');
         }
 
-        // Create the transaction record (using today's date)
-        $transaction = Transaction::create([
-            'transactionDate' => now()->toDateString(),
-            'totalPrice'      => $totalPrice,
-            'customerId'      => $request->customerId,
-        ]);
-
-        // Create transaction detail records for each cart item
-        foreach ($cart as $item) {
-            TransactionDetail::create([
-                'transactionId'    => $transaction->id,
-                'productId'        => $item['id'],
-                'productQuantity'  => $item['quantity'],
-                'subTotal'         => $item['price'] * $item['quantity'],
+        DB::transaction(function() use ($request, $cart, $totalPrice) {
+            $transaction = Transaction::create([
+                'transactionDate' => now()->toDateString(),
+                'totalPrice'      => $totalPrice,
+                'customerId'      => $request->customerId,
             ]);
-        }
+
+            foreach ($cart as $item) {
+                $product = Product::findOrFail($item['id']);
+
+                if ($product->stock < $item['quantity']) {
+                    throw new \Exception("Not enough stock for product ID: {$product->id}");
+                }
+
+                $product->stock -= $item['quantity'];
+                $product->save();
+
+                TransactionDetail::create([
+                    'transactionId'   => $transaction->id,
+                    'productId'       => $item['id'],
+                    'productQuantity' => $item['quantity'],
+                    'subTotal'        => $item['price'] * $item['quantity'],
+                ]);
+            }
+        });
 
         return redirect(url('/transaction'))->with('success', 'Transaksi berhasil dibuat.');
     }
-
-    // ... (other methods)
 }

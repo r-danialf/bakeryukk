@@ -55,7 +55,7 @@
                         </select>
                     </div>
                     <div class="tombolcashier">
-                        <button type="button" class="cancelbtn">Bersihkan</button>
+                        <button type="button" class="cancelbtn" onclick="cleanCashier()">Bersihkan</button>
                         <button type="submit" class="confirmbtn">Transaksi</button>
                     </div>
                 </div>

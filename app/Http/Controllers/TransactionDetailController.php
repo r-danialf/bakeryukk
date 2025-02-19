@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 
 class TransactionDetailController extends Controller
 {
-    /**
-     * Store a newly created transaction detail in storage.
-     */
+
     public function store(Request $request)
     {
         $request->validate([
@@ -29,9 +27,6 @@ class TransactionDetailController extends Controller
         return redirect(url('/transaction'))->with('success', 'Detail transaksi berhasil dibuat.');
     }
 
-    /**
-     * Update the specified transaction detail in storage.
-     */
     public function update(Request $request, TransactionDetail $transactionDetail)
     {
         $request->validate([
@@ -51,9 +46,6 @@ class TransactionDetailController extends Controller
         return redirect()->back()->with('success', 'Detail transaksi berhasil diubah.');
     }
 
-    /**
-     * Remove the specified transaction detail from storage.
-     */
     public function destroy(TransactionDetail $transactionDetail)
     {
         $transactionDetail->delete();
