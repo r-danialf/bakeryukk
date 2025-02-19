@@ -12,6 +12,7 @@
         @include('components.top-nav')
         <main>
             <div class="mainlist">
+                @if(Auth::check() && Auth::user()->level === 'admin')
                 <div class="maincontrols">
                     <div>
                         <button class="createbtn" onclick="showCreateMenu(true)">
@@ -19,6 +20,7 @@
                         </button>
                     </div>
                 </div>
+                @endif
 
                 <x-transaction-list />
             </div>
@@ -69,6 +71,7 @@
                                     </table>
                                 </div>
                             </div>
+                            @if(Auth::check() && Auth::user()->level === 'admin')
                             <hr>
                             <div class="crudbuttonsect">
                                 <form id="deleteForm{{ $transaction->id }}" action="{{ route('transactions.destroy', $transaction) }}" method="POST" hidden>
@@ -79,8 +82,10 @@
                                 <button class="updatebtn" onclick="showUpdateMenu(true)">Update Transaksi</button>
                                 <button class="deletebtn" onclick="deleteProduct({{ $transaction->id }})">Hapus Transaksi</button>
                             </div>
+                            @endif
                         </div>
                     </div>
+                    @if(Auth::check() && Auth::user()->level === 'admin')
                     <div class="infocrud" hidden>
                         <div class="paddedinfo">
                             <form action="{{ route('transactions.update', $transaction) }}" method="POST" enctype="multipart/form-data">
@@ -106,6 +111,7 @@
                             </form>
                         </div>
                     </div>
+                    @endif
                 @else
                     <div class="information">
                         <div class="paddedinfo">

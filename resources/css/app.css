@@ -27,6 +27,11 @@ body {
         align-items: center;
     }
 
+    img {
+        height: 100%;
+        margin-right: 1em;
+    }
+
     .tn-title {
         color: white;
         padding: 0;
@@ -539,5 +544,33 @@ main {
 
             }
         }
+    }
+}
+
+.landing {
+    padding: 12em 40em 0 5em;
+    height: 100vh;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    hr {
+        margin: 2em 0;
+        border: 2px solid white;
+    }
+
+    h1, p {
+        color: white;
+    }
+
+    p {
+        margin: 0.2em 0;
+        padding: 0;
+
+        font-size: 20px;
+    }
+
+    div {
+        margin: auto;
     }
 }

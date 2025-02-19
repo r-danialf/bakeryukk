@@ -60,4 +60,28 @@ class TransactionController extends Controller
 
         return redirect(url('/transaction'))->with('success', 'Transaksi berhasil dibuat.');
     }
+
+    public function update(Request $request, Transaction $transaction)
+    {
+        $request->validate([
+            'transactionDate' => 'required|date',
+            'totalPrice' => 'required|numeric',
+            'customerId' => 'required|exists:customers,id',
+        ]);
+
+        $transaction->update([
+            'transactionDate' => $request->transactionDate,
+            'totalPrice' => $request->totalPrice,
+            'customerId' => $request->customerId,
+        ]);
+
+        return redirect()->back()->with('success', 'Transaksi berhasil diubah.');
+    }
+
+    public function destroy(Transaction $transaction)
+    {
+        $transaction->delete();
+        return redirect(url('/transaction'))->with('success', 'Transaksi berhasil dihapus.');
+    }
+
 }
