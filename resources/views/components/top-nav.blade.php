@@ -17,12 +17,18 @@
                 @endif
                 <li><a href="/transaction"
                     @if(request()->is('transaction') || request()->is('transaction/*')) chosen @endif>Transaksi</a></li>
+                @if(Auth::check() && Auth::user()->level === 'admin')
+                    <li><a href="/report"
+                        @if(request()->is('report') || request()->is('report/*')) chosen @endif>Laporan</a></li>
+                    <li><a href="/settings"
+                        @if(request()->is('settings')) chosen @endif>Pengaturan</a></li>
+                @endif
             </ul>
         </div>
     </div>
     <div class="tn-navlink">
         <ul>
-            <li><a href="#">{{ Auth::user()->name ?? 'Guest' }}</a></li>
+            <li><p>{{ Auth::user()->name ?? 'Guest' }}</p></li>
         </ul>
         <div class="tn-separator"></div>
         <ul>

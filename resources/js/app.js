@@ -126,6 +126,53 @@ window.showCreateMenu = function (state) {
     });
 }
 
+window.showReceiptMenu = function (state) {
+    document.querySelectorAll('.receipt-section').forEach(element => {
+        element.hidden = !state;
+    });
+
+    document.querySelectorAll('.details-section').forEach(element => {
+        element.hidden = state;
+    });
+
+    document.querySelectorAll('.onreceipt').forEach(element => {
+        element.onclick = function () {
+            showReceiptMenu(!state);
+        };
+        element.innerText = (!state) ? "Cek Struk" : "Cek Barang";
+    });
+}
+
+window.printReceipt = function() {
+    let receiptContent = document.getElementsByClassName("receipt-content")[0].innerHTML;
+    let printWindow = window.open("", "", "width=400,height=400");
+
+    printWindow.document.write(`
+        <html>
+        <head>
+            <title>Cetak Struk</title>
+            <style>
+                body { font-family: monospace; text-align: center; }
+                pre { font-size: 14px; }
+            </style>
+        </head>
+        <body>
+            <pre>${receiptContent}</pre>
+            <script>
+                window.onload = function() {
+                    window.print();
+                    window.onafterprint = function() {
+                        window.close();
+                    };
+                };
+            </script>
+        </body>
+        </html>
+    `);
+
+    printWindow.document.close();
+}
+
 window.deleteProduct = function (id) {
     document.getElementById(`deleteForm${id}`).submit();
 }

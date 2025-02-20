@@ -81,8 +81,23 @@
 
                                 <button class="updatebtn" onclick="showUpdateMenu(true)">Update Transaksi</button>
                                 <button class="deletebtn" onclick="deleteProduct({{ $transaction->id }})">Hapus Transaksi</button>
+                                <button class="receiptbtn onreceipt" onclick="showReceiptMenu(true)">Cek Struk</button>
                             </div>
                             @endif
+                            <hr>
+                            <div class="details-section">
+                                <x-transaction-detail-table :transactionId="$transaction->id" />
+                            </div>
+                            <div class="receipt-section" hidden>
+                                <div class="receipt-content">
+                                    <x-receipt-transaction :transactionId="$transaction->id" />
+                                </div>
+                                <div class="crudbuttonsect">
+                                    <button class="receiptbtn" onclick="printReceipt()">
+                                        Cetak Struk
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     @if(Auth::check() && Auth::user()->level === 'admin')

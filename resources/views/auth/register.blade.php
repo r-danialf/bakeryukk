@@ -12,9 +12,14 @@
         button { width: 100%; padding: 10px; background: #333; color: #fff; border: none; }
         a { display: block; text-align: center; margin-top: 10px; text-decoration: none; }
         .errors { color: red; font-size: 0.9em; }
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('{{ asset('storage/images/menu/breads.jpg') }}');
+        }
     </style>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
+    @include('components.landing-top-nav')
     <div class="container">
         <h2>Register</h2>
         @if ($errors->any())

@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 
 Route::resource('products', ProductController::class);
 Route::resource('customers', CustomerController::class);
@@ -26,9 +27,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    });
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 
     Route::get('/cashier', function () {
         return view('cashier');
@@ -36,6 +35,15 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/customer', function () {
         return view('customer');
+    });
+    Route::get('customer/{id}', function ($id) {
+        $customer = Customer::find($id);
+
+        if (!$customer) {
+            return redirect('customer')->with('error', 'Pelanggan tidak ditemukan.');
+        }
+
+        return view('customer', compact('customer'));
     });
 
     Route::get('/transaction', function () {
