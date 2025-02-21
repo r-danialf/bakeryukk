@@ -10,6 +10,12 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\DatabaseDumpController;
+
+Route::post('/database-dump', [DatabaseDumpController::class, 'dump'])
+     ->middleware('auth')
+     ->name('database.dump');
+
 
 Route::get('/report', function () {
     return view('report');

@@ -25,6 +25,12 @@
             <button type="submit">Print Laporan Transaksi </button>
         </form>
 
+        <form action="{{ route('database.dump') }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure?')">
+                Export Database
+            </button>
+        </form>
     </div>
 </body>
 </html>

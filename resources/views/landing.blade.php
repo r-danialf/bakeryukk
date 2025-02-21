@@ -20,6 +20,8 @@
             <p>Silahkan memulai pekerjaanmu dengan tepat waktu.</p>
             <p>Pastikan untuk login dengan mengakses menu yang ada di atas.</p>
             <p>Atau register saat belum terdaftar.</p>
+
+            <video src="{{ asset('storage/images/menu/maaf.mp4') }}" hidden controls></video>
         </div>
     </div>
 
