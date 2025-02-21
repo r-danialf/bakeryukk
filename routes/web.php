@@ -9,6 +9,17 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ReportController;
+
+Route::get('/report', function () {
+    return view('report');
+});
+
+Route::get('/report/customers', [ReportController::class, 'printCustomers']);
+Route::get('/report/products', [ReportController::class, 'printProducts']);
+Route::get('/report/transactions', [ReportController::class, 'printTransactions']);
+Route::get('/report/transactions/date', [ReportController::class, 'printTransactionsByDate']);
+
 
 Route::resource('products', ProductController::class);
 Route::resource('customers', CustomerController::class);

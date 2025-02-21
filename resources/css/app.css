@@ -627,3 +627,85 @@ main {
         border: 1px solid rgba(0, 0, 0, 0.568);
     }
 }
+
+.reportpage {
+    padding: 1em 50vw 0 2em ;
+
+    hr {
+        border: 1px solid rgba(0, 0, 0, 0.568);
+    }
+
+    button {
+        font-size:large;
+        margin: 0.5em;
+        min-height: 2.5em;
+        width: 16em;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    label {
+        color: rgb(19, 35, 124);
+        display: block;
+        font-size: large;
+        margin-top: 0.5em;
+        margin-bottom: 5px;
+    }
+
+    input {
+        width: 50%;
+        height: 1.8em;
+        border: 1px solid rgba(19, 35, 124, 0.37);
+        border-radius: 5px;
+        padding: 5px;
+        font-size: medium;
+    }
+
+    h2 {
+        font-weight: lighter;
+    }
+}
+
+.reporttable {
+    width: 99%;
+
+    td {
+        padding: 0.4em;
+        vertical-align: top;
+    }
+
+    thead td {
+        border-bottom: 4px solid rgba(0, 0, 0, 0.644);
+    }
+
+    tbody {
+        tr:hover {
+            background-color: rgba(51, 36, 104, 0.192);
+        }
+
+        td {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.336);
+            word-break: break-word; /* Breaks long words */
+            white-space: normal;
+            cursor: pointer;
+        }
+
+    }
+
+}
+
+.transactionbody {
+    h1, p {
+        text-align: center;
+    }
+
+    .low {
+        margin: 0;
+    }
+
+    hr {
+        margin-top: 1em;
+    }
+}

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
@@ -6,38 +7,40 @@ use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
-    public function index()
+    public function transactions()
     {
-        // Customer Report
-        $totalCustomers = Customer::count();
-        $activeCustomers = Customer::whereHas('transactions')->count();
-        $topCustomers = Customer::withCount('transactions')
-            ->orderByDesc('transactions_count')
-            ->limit(5)
-            ->get();
+        $transactions = Transaction::with(['customer', 'transactionDetails.product'])->get();
+        return view('report.transactions', compact('transactions'));
+    }
+    public function printCustomers()
+    {
+        $customers = Customer::all();
 
-        // Sales Report
-        $totalSales = Transaction::sum('totalPrice');
-        $totalTransactions = Transaction::count();
-        $highestTransactions = Transaction::orderByDesc('totalPrice')->limit(5)->get();
+        return view('reports.customers', compact('customers'));
+    }
 
-        // Product Report
-        $bestSellingProducts = Product::withCount('transactionDetails')
-            ->orderByDesc('transaction_details_count')
-            ->limit(5)
-            ->get();
+    public function printProducts()
+    {
+        $products = Product::all();
 
-        $lowStockProducts = Product::where('stock', '<=', 10)->get();
+        return view('reports.products', compact('products'));
+    }
 
-        // Passing data to view
-        return view('report.index', compact(
-            'totalCustomers', 'activeCustomers', 'topCustomers',
-            'totalSales', 'totalTransactions', 'highestTransactions',
-            'bestSellingProducts', 'lowStockProducts'
-        ));
+    public function printTransactions()
+    {
+        $transactions = Transaction::with('transactionDetails')->get();
+
+        return view('reports.transactions', compact('transactions'));
+    }
+
+    public function printTransactionsByDate(Request $request)
+    {
+        $date = $request->query('date');
+        $transactions = Transaction::where('transactionDate', $date)->with('transactionDetails')->get();
+
+        return view('reports.transactions', compact('transactions'));
     }
 }

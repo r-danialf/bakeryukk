@@ -19,9 +19,7 @@
                     @if(request()->is('transaction') || request()->is('transaction/*')) chosen @endif>Transaksi</a></li>
                 @if(Auth::check() && Auth::user()->level === 'admin')
                     <li><a href="/report"
-                        @if(request()->is('report') || request()->is('report/*')) chosen @endif>Laporan</a></li>
-                    <li><a href="/settings"
-                        @if(request()->is('settings')) chosen @endif>Pengaturan</a></li>
+                        @if(request()->is('report')) chosen @endif>Laporan</a></li>
                 @endif
             </ul>
         </div>
