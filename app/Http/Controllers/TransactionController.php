@@ -13,9 +13,10 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'money'      => 'required|numeric',
-            'customerId' => 'required|exists:customers,id',
-            'cart'       => 'required',
+            'money'        => 'required|numeric',
+            'customerId'   => 'required|exists:customers,id',
+            'buyingMethod' => 'required|in:Diambil,Diantar', // <-- Validate buyingMethod
+            'cart'         => 'required',
         ]);
 
         $cart = json_decode($request->cart, true);
@@ -36,6 +37,7 @@ class TransactionController extends Controller
             $transaction = Transaction::create([
                 'transactionDate' => now()->toDateString(),
                 'totalPrice'      => $totalPrice,
+                'buyingMethod'    => $request->buyingMethod, // <-- Include buyingMethod
                 'customerId'      => $request->customerId,
             ]);
 
@@ -65,23 +67,18 @@ class TransactionController extends Controller
     {
         $request->validate([
             'transactionDate' => 'required|date',
-            'totalPrice' => 'required|numeric',
-            'customerId' => 'required|exists:customers,id',
+            'totalPrice'      => 'required|numeric',
+            'buyingMethod'    => 'required|in:Diambil,Diantar', // <-- Validate buyingMethod
+            'customerId'      => 'required|exists:customers,id',
         ]);
 
         $transaction->update([
             'transactionDate' => $request->transactionDate,
-            'totalPrice' => $request->totalPrice,
-            'customerId' => $request->customerId,
+            'totalPrice'      => $request->totalPrice,
+            'buyingMethod'    => $request->buyingMethod, // <-- Include buyingMethod
+            'customerId'      => $request->customerId,
         ]);
 
         return redirect()->back()->with('success', 'Transaksi berhasil diubah.');
     }
-
-    public function destroy(Transaction $transaction)
-    {
-        $transaction->delete();
-        return redirect(url('/transaction'))->with('success', 'Transaksi berhasil dihapus.');
-    }
-
 }

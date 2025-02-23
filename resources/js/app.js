@@ -56,15 +56,15 @@ function renderTable() {
                 <td>Rp${item.price}</td>
                 <td>
                     <div class="quantity-control">
-                        <button type="button" onclick="updateQuantity('${id}', -1)">-</button>
+                        <button class="btn btn-secondary" type="button" onclick="updateQuantity('${id}', -1)">-</button>
                         <span>${item.quantity}</span>
-                        <button type="button" onclick="updateQuantity('${id}', 1)">+</button>
+                        <button class="btn btn-secondary" type="button" onclick="updateQuantity('${id}', 1)">+</button>
                     </div>
                 </td>
                 <td>Rp${totalPrice}</td>
                 <td>
                     <div class="quantity-control">
-                        <button type="button" onclick="removeFromCashier('${id}')">Hapus</button>
+                        <button class="btn btn-danger" type="button" onclick="removeFromCashier('${id}')">Hapus</button>
                     </div>
                 </td>
             </tr>

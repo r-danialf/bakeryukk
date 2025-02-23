@@ -1,16 +1,20 @@
-<div class="customerlist">
-    <table>
-        <thead>
-            <tr>
-                <td><i>ID</i></td>
-                <td><i>Nama Pembeli</i></td>
-                <td><i>Alamat</i></td>
-                <td><i>No. Telp</i></td>
-            </tr>
-        </thead>
+
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-bordered w-100">
+        <thead class="thead-dark">
+    <tr>
+        <th><i>ID</i></th>
+        <th><i>Nama Pembeli</i></th>
+        <th><i>Alamat</i></th>
+        <th><i>No. Telp</i></th>
+    </tr>
+</thead>
+
+
         <tbody>
             @foreach ($customers as $customer)
-            <tr onclick="checkCustomer({{ $customer->id }})">
+            <tr class="listtrans" onclick="checkCustomer({{ $customer->id }})">
                 <td>{{ $customer->id }}</td>
                 <td><b>{{ $customer->customerName }}</b></td>
                 <td><i>{{ $customer->address }}</i></td>
@@ -26,3 +30,13 @@
         window.location.href = `/customer/${id}`;
     }
 </script>
+
+<style>
+        tbody {
+            .listtrans:hover {
+                background-color: rgba(0, 0, 0, 0.07);
+            }
+        }
+    </style>
+
+</div>

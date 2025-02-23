@@ -9,6 +9,7 @@ class Transaction extends Model
     protected $fillable = [
         'transactionDate',
         'totalPrice',
+        'buyingMethod', 
         'customerId',
     ];
 
@@ -17,7 +18,6 @@ class Transaction extends Model
         return $this->belongsTo(Customer::class, 'customerId');
     }
 
-    // Relationship to TransactionDetail
     public function transactionDetails()
     {
         return $this->hasMany(TransactionDetail::class, 'transactionId');

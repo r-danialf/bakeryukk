@@ -1,7 +1,7 @@
 <nav class="topnav">
     <div>
         <img src="{{ asset('storage/images/menu/bun.webp') }}" alt="">
-        <div class="tn-title">Crème n' Crumb</div>
+        <div class="tn-title">Felia Bakery</div>
         <div class="tn-separator"></div>
         <div class="tn-navlink">
             <ul>

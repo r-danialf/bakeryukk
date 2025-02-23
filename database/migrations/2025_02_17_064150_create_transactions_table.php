@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('transactionDate');
             $table->decimal('totalPrice', 10, 2);
+            $table->enum('buyingMethod', ['Diambil', 'Diantar'])->default('Diambil');
             $table->foreignId('customerId')->constrained('customers')->onDelete('cascade');
             $table->timestamps();
         });

@@ -1,13 +1,9 @@
-<nav class="topnav">
-    <div>
-        <img src="{{ asset('storage/images/menu/bun.webp') }}" alt="">
-        <div class="tn-title">Crème n' Crumb</div>
-        <div class="tn-separator"></div>
+<img src="{{ asset('storage/images/menu/gandum1.png') }}" class="corner-decoration top-right" alt="Leaf Decor">
+    <div class="nav">
+        <a href="/login">Login</a>
+        <a href="/register">Registrasi</a>
     </div>
-    <div class="tn-navlink">
-        <ul>
-            <li><a href="/register">Register</a></li>
-            <li><a href="/login">Login</a></li>
-        </ul>
+    <div class="container">
+        <div class="title">Selamat Datang di Felia Bakery</div>
+        <div class="subtitle">Rasa dan Kualitas Terbaik!</div>
     </div>
-</nav>

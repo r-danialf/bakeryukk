@@ -1,10 +1,11 @@
 <pre>
 =================================
-   Bakery Receipt
+   Struk Felia Bakery
 =================================
 Tanggal    : {{ $transaction->transactionDate }}
 ID Transaksi: {{ $transaction->id }}
 Pelanggan  : {{ $transaction->customer->customerName }}
+Metode     : {{ $transaction->buyingMethod }}
 ---------------------------------
 Item            Qty   Subtotal
 ---------------------------------
