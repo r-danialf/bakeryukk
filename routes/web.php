@@ -17,16 +17,6 @@ Route::post('/database-dump', [DatabaseDumpController::class, 'dump'])
      ->name('database.dump');
 
 
-Route::get('/report', function () {
-    return view('dashboard');
-});
-
-Route::get('/report/customers', [ReportController::class, 'printCustomers']);
-Route::get('/report/products', [ReportController::class, 'printProducts']);
-Route::get('/report/transactions', [ReportController::class, 'printTransactions']);
-Route::get('/report/transactions/date', [ReportController::class, 'printTransactionsByDate']);
-
-
 Route::resource('products', ProductController::class);
 Route::resource('customers', CustomerController::class);
 Route::resource('transactions', TransactionController::class);
@@ -89,6 +79,16 @@ Route::middleware('auth')->group(function () {
 
             return view('dashboard', compact('product'));
         });
+
+        Route::get('/report', function () {
+            return view('dashboard');
+        });
+        
+        Route::get('/report/customers', [ReportController::class, 'printCustomers']);
+        Route::get('/report/products', [ReportController::class, 'printProducts']);
+        Route::get('/report/transactions', [ReportController::class, 'printTransactions']);
+        Route::get('/report/transactions/date', [ReportController::class, 'printTransactionsByDate']);
+        
     });
 });
 

@@ -1,115 +1,131 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NESSA BAKERY</title>
+    <title>Login</title>
     <style>
         body {
-            background-color: #F3E5AB;
-            color: #4E2B24;
-            font-family: Arial, sans-serif;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            text-align: center;
+            background-color: #fff4e6;
             margin: 0;
             padding: 0;
-            
-            background-size: cover;
-            background-repeat: no-repeat; /* Prevents tiling */
-            background-position: center; /* Centers the image */
-            background-attachment: fixed; /* Keeps the image fixed */
-        }
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-        }
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-        .logo-container img {
-            height: 64px;
-            width: auto;
-            margin-right: 10px;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: #4E2B24;
-            margin-left: 15px;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover {
-            color: #7B3F00;
-        }
-        .hero-section {
+            position: relative;
+            width: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            /*background-image: url('http://127.0.0.1:8000/images/bg2.jpg');
+            */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            overflow: hidden;
+        }
+        .container {
+            background-color: rgb(71, 46, 20);
+            padding: 40px 10px;
+            flex-grow: 1;
+        }
+        .title {
+            font-size: 55px;
+            font-weight: bold;
+            color: rgb(247, 213, 189);
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+        }
+        .subtitle {
+            font-size: 28px;
+            color: rgb(233, 181, 143);
+            font-style: italic;
+        }
+        .banner {
             text-align: center;
-            padding: 40px 20px;
+            height: 62vh;
+            display: flex;
         }
-        .hero-text {
-            max-width: 600px;
-            margin-bottom: 20px;
+        .banner .image {
+            flex: -30;
+            display: flex;
+            align-items: center;
         }
-        .hero-text h1 {
+        .banner-text {
+            width: 40%;
+            font-size: 20px;
+            color: rgb(53, 26, 6);
+            text-align: left;
+            margin-top: 50px;
+        }
+        .footer {
+            background-color: #3a2612;
+            color: white;
+            padding: 15px;
             font-size: 20px;
             font-weight: bold;
-        }
-        .hero-text h2 {
-            font-size: 50px;
-            font-weight: bold;
-        }
-        .hero-text p {
-            font-size: 16px;
-        }
-        
-        
-        footer {
+            margin-top: 15px;
+            border-radius: 15px;
+            display: block;
+            width: 100%;
             text-align: center;
-            padding: 15px;
-            font-size: 14px;
+            position: relative;
         }
-        @media (min-width: 768px) {
-            .hero-section {
-                flex-direction: row;
-                justify-content: center;
-                text-align: left;
-                padding: 60px 80px;
-                margin
-            }
-            .hero-text {
-                flex: 1;
-            }
-            .hero-image {
-                flex: 1;
-                text-align: right;
-            }
+        marquee {
+            font-size: 16px;
+            font-weight: bold;
+            display: block;
+        }
+        .corner-decoration {
+            position: absolute;
+            padding: 20px;
+            width: 160px;
+            height: 160px;
+        }
+        .top-right {
+            top: 2px;
+            right: 2px;
+        }
+        .nav {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 15px;
+        }
+        .nav a {
+            color: #3a2612;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 18px;
+            background: #f3d9b1;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+        .nav a:hover {
+            background: #e4b97f;
         }
 
-        .logincontainer { width: 300px; margin: 50px auto; background: #fff; padding: 20px; border: 1px solid #ccc; }
+        .logincontainer { width: 300px; margin: 1em auto; background: #fff; padding: 20px; border: 1px solid #ccc; }
         h2 { text-align: center; }
         input { width: 90%; padding: 10px; margin: 5px 0; }
         button { width: 100%; padding: 10px; background: #333; color: #fff; border: none; }
-        .loga { display: block; text-align: center; margin-top: 10px; text-decoration: none; }
+        a { display: block; text-align: center; margin-top: 10px; text-decoration: none; }
         .errors { color: red; font-size: 0.9em; }
     </style>
+
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <img src="{{ asset('storage/images/menu/logobakery.png') }}" alt="Logo Bakery">
-            <span class="text-lg font-semibold">@Nessa.bakery_</span>
-        </div>
-        <nav class="nav-links">
-            <a href="{{ route('login') }}">Login</a>
-            <a href="{{ route('register') }}">Registrasi</a>
-        </nav>
-    </header>
-
-    
-
-    <div class="logincontainer">
+    <img src="{{ asset('storage/images/menu/gandum1.png') }}" class="corner-decoration top-right" alt="Leaf Decor">
+    <div class="nav">
+        <a href="/login">Login</a>
+        <a href="/register">Registrasi</a>
+    </div>
+    <div class="container">
+        <div class="title">Selamat Datang di Felia Bakery</div>
+        <div class="subtitle">Rasa dan Kualitas Terbaik!</div>
+    </div>
+    <div class="banner">
+        <div class="image">
+            <img src="{{ asset('storage/images/menu/chef1.png') }}" alt="">
+        </div> 
+        <div class="logincontainer">
             <h2>Register</h2>
             @if ($errors->any())
                 <div class="errors">
@@ -128,9 +144,12 @@
                 <input type="password" name="password_confirmation" placeholder="Confirm Password" required>
                 <button type="submit">Register</button>
             </form>
-            <a class="loga" href="{{ route('login') }}">Already have an account? Login</a>
+            <a href="{{ route('login') }}">Already have an account? Login</a>
         </div>
-
-
+    </div>
+    <div class="footer">
+        <marquee> ☎️ 088296190618 | 📍 Sumberrejo, Bojonegoro, Jawa Timur | 🚗 Kunjungi Toko Roti Felia Bakery!!</marquee>
+    </div>
 </body>
 </html>
+        

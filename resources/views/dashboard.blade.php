@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
-    <title>Nessa Bakery</title>
+    <title>Felia Bakery</title>
     
     
     <!-- Custom fonts for this template-->
@@ -22,7 +22,7 @@
                 <div class="sidebar-brand-icon">
                     <i class="fas fa-birthday-cake"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Nessa Bakery</div>
+                <div class="sidebar-brand-text mx-3">Felia Bakery</div>
             </a>
             
             <hr class="sidebar-divider">
@@ -64,12 +64,14 @@
                 </a>
             </li>
             
+            @if(Auth::check() && Auth::user()->level === 'admin')
             <li class="nav-item">
                 <a class="nav-link" href="/report">
                     <i class="fas fa-file-invoice"></i>
                     <span>Rekap Penjualan</span>
                 </a>
             </li>
+            @endif
         </ul>
         
         
