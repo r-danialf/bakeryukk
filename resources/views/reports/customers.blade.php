@@ -9,8 +9,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="transactionbody">
-    <h1 class="low">Toko Crème n' Crumb</h1>
-    <p class="low">Jl. Semangka No. 276B, Kursi Panjang, Surabaya Utara</p>
+    <h1 class="low">Nessa Bakery</h1>
+    <p class="low">Jl.Soekarno No.19 Sukosewu, Bojonegoro</p>
     <hr>
     <h1>Laporan Pelanggan</h1>
     <table class="reporttable">

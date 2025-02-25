@@ -1,9 +1,9 @@
-<ul class="navbar-nav bg-warning sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-primarysidebar sidebar-dark accordion" id="accordionSidebar">
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
     <div class="sidebar-brand-icon">
     <i class="fas fa-birthday-cake"></i>
 </div>
-        <div class="sidebar-brand-text mx-3">Felia Bakery</div>
+        <div class="sidebar-brand-text mx-3">Nessa Bakery</div>
     </a>
 
     <hr class="sidebar-divider">
@@ -47,7 +47,14 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ route('transaksi.index') }}">
                 <i class="fas fa-users"></i>
-                <span>Transaksi</span>
+                <span>Rekap Transaksi</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('transaksi.index') }}">
+                <i class="fas fa-users"></i>
+                <span>Rekap Penjualan</span>
             </a>
         </li>
     @endif

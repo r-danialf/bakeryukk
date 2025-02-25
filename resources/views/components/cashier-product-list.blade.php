@@ -55,7 +55,7 @@
           <span><b>{{ $product->productName }}</b></span>
         </div>
         <div class="productinfo">
-          <span><i>Rp{{ $product->price }}</i></span>
+          <span><i>Rp{{ number_format($product->price, 2, ',', '.') }}</i></span>
           <span><b>{{ $product->stock }}x</b></span>
         </div>
       </div>

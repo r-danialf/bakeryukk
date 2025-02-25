@@ -15,7 +15,7 @@
                 <tr class="listtrans" onclick="checkTransaction({{ $transaction->id }})">
                     <td>{{ $transaction->id }}</td>
                     <td>{{ $transaction->transactionDate }}</td>
-                    <td>Rp{{ $transaction->totalPrice }}</td>
+                    <td>Rp{{ number_format($transaction->totalPrice, 2, ',', '.') }}</td>
                     <td>{{ $transaction->customer->customerName }}</td>
                     <td>{{ $transaction->buyingMethod }}</td>
                 </tr>

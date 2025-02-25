@@ -9,8 +9,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="transactionbody">
-    <h1 class="low">Toko Crème n' Crumb</h1>
-    <p class="low">Jl. Semangka No. 276B, Kursi Panjang, Surabaya Utara</p>
+    <h1 class="low">Nessa Bakery</h1>
+    <p class="low">Jl.Soekarno No.19 Sukosewu, Bojonegoro</p>
     <hr>
     <h1>Laporan Produk</h1>
     <table class="reporttable" >
@@ -24,7 +24,7 @@
             <tr>
                 <td>{{ $product->id }}</td>
                 <td>{{ $product->productName }}</td>
-                <td>{{ $product->price }}</td>
+                <td>Rp{{ number_format($product->price, 2, ',', '.') }}</td>
                 <td>{{ $product->stock }}</td>
             </tr>
         @endforeach

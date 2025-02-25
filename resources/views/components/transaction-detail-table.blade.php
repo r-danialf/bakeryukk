@@ -13,7 +13,7 @@
                 <tr>
                     <td>{{ $detail->productName }}</td>
                     <td>{{ $detail->productQuantity }}</td>
-                    <td>{{ number_format($detail->subTotal, 2) }}</td>
+                    <td>Rp{{ number_format($detail->subTotal, 2, ',', '.') }}</td>
                 </tr>
                 @endforeach
             </tbody>

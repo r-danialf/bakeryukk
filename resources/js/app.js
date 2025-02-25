@@ -6,10 +6,27 @@ function addToCashier(id, name, price) {
     if (cart[id]) {
         cart[id].quantity++;
     } else {
+        price = num(price);
+
         cart[id] = { id, name, price, quantity: 1 };
     }
     renderTable();
     getSpare();
+}
+
+function rp(number) {
+    return new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 3
+    }).format(number);
+}
+
+function num(rupiah) {
+    let cleaned = rupiah.replace('Rp', '').trim();
+
+    return parseFloat(cleaned.replace(/\./g, '').replace(',', '.'));
 }
 
 window.updateQuantity = function (id, change) {
@@ -53,7 +70,7 @@ function renderTable() {
                 <td>${index}</td>
                 <td>${item.id}</td>
                 <td>${item.name}</td>
-                <td>Rp${item.price}</td>
+                <td>${rp(item.price)}</td>
                 <td>
                     <div class="quantity-control">
                         <button class="btn btn-secondary" type="button" onclick="updateQuantity('${id}', -1)">-</button>
@@ -61,7 +78,7 @@ function renderTable() {
                         <button class="btn btn-secondary" type="button" onclick="updateQuantity('${id}', 1)">+</button>
                     </div>
                 </td>
-                <td>Rp${totalPrice}</td>
+                <td>${rp(totalPrice)}</td>
                 <td>
                     <div class="quantity-control">
                         <button class="btn btn-danger" type="button" onclick="removeFromCashier('${id}')">Hapus</button>
@@ -72,14 +89,14 @@ function renderTable() {
         tbody.innerHTML += row;
         index++;
     }
-    document.getElementById("grand-total").innerText = total;
+    document.getElementById("grand-total").innerText = rp(total);
 }
 
 document.querySelectorAll(".product").forEach(product => {
     product.addEventListener("click", function() {
         const id = this.id;
         const name = this.querySelector(".productname span b").innerText;
-        const price = parseInt(this.querySelector(".productinfo span i").innerText.replace("Rp", ""));
+        const price = this.querySelector(".productinfo span i").innerText.replace("Rp", "");
         addToCashier(id, name, price);
     });
 });
@@ -89,9 +106,9 @@ function getSpare () {
     const sparebox = document.getElementById("spare-change");
 
     const money = parseFloat(getmoney.value) || 0;
-    const total = parseFloat(document.getElementById("grand-total").innerText) || 0;
+    const total = parseFloat(num(document.getElementById("grand-total").innerText)) || 0;
     const change = money - total;
-    sparebox.innerText = change >= 0 ? change : 0;
+    sparebox.innerText = change >= 0 ? rp(change) : 0;
 }
 
 if (document.getElementById('money')) {

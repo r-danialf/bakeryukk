@@ -60,7 +60,14 @@
         <li class="nav-item">
             <a class="nav-link" href="/transaction">
                 <i class="fas fa-handshake"></i>
-                <span>Transaksi</span>
+                <span>Rekap Penjualan</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/report">
+                <i class="fas fa-file-invoice"></i>
+                <span>Rekap Penjualan</span>
             </a>
         </li>
 </ul>
@@ -88,7 +95,28 @@
 </nav>
                 <!-- // CHANGE EVERYTHING IN HERE -->
                 <div class="container-fluid">
-                    @yield('content')
+                <div class="reportpage">
+        <h1>Report Page</h1>
+        <hr>
+        <h2>Laporan Keseluruhan</h2>
+        <button onclick="window.location.href='{{ url('/report/customers') }}'">Print Laporan Pelanggan</button> <br>
+        <button onclick="window.location.href='{{ url('/report/products') }}'">Print Laporan Produk</button> <br>
+        <button onclick="window.location.href='{{ url('/report/transactions') }}'">Print Semua Laporan Transaksi</button>
+        <hr>
+        <h2>Laporan Khusus</h2>
+        <form action="{{ url('/report/transactions/date') }}" method="GET">
+            <label for="date">Pilih Tanggal Khusus:</label>
+            <input type="date" name="date" required><br>
+            <button type="submit">Print Laporan Transaksi </button>
+        </form>
+
+        <form action="{{ route('database.dump') }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure?')">
+                Export Database
+            </button>
+        </form>
+    </div>
                 </div>
             </div>
         </div>
