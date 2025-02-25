@@ -14,7 +14,7 @@ class ProductController extends Controller
             'productName' => 'required|string|max:255',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:4096'
         ]);
 
         if ($request->hasFile('image')) {

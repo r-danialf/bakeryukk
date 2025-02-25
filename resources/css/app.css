@@ -629,7 +629,11 @@ main {
 }
 
 .reportpage {
-    padding: 1em 50vw 0 2em ;
+    display: flex;
+    div {
+        padding: 1em 1em 0 2em;
+    }
+
 
     hr {
         border: 1px solid rgba(0, 0, 0, 0.568);
@@ -655,7 +659,7 @@ main {
     }
 
     input {
-        width: 50%;
+        width: 100%;
         height: 1.8em;
         border: 1px solid rgba(19, 35, 124, 0.37);
         border-radius: 5px;

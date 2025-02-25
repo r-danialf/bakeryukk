@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <style>
-        /* Minimal CSS styling */
         body { font-family: Arial, sans-serif; background: #f4f4f4; }
         .container { width: 300px; margin: 50px auto; background: #fff; padding: 20px; border: 1px solid #ccc; }
         h2 { text-align: center; }

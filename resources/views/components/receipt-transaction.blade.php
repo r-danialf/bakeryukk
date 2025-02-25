@@ -1,6 +1,6 @@
 <pre>
 =================================
-   Bakery Receipt
+Struk Bakery Crème n' Crumb
 =================================
 Tanggal    : {{ $transaction->transactionDate }}
 ID Transaksi: {{ $transaction->id }}

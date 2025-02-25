@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <title>Register</title>
     <style>
-        /* Minimal CSS styling */
         body { font-family: Arial, sans-serif; background: #f4f4f4; }
         .container { width: 300px; margin: 50px auto; background: #fff; padding: 20px; border: 1px solid #ccc; }
         h2 { text-align: center; }
-        input { width: 100%; padding: 10px; margin: 5px 0; }
+        input { width: 92%; padding: 10px; margin: 5px 0; }
         button { width: 100%; padding: 10px; background: #333; color: #fff; border: none; }
         a { display: block; text-align: center; margin-top: 10px; text-decoration: none; }
         .errors { color: red; font-size: 0.9em; }

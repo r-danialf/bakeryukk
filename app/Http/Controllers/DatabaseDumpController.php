@@ -11,37 +11,23 @@ class DatabaseDumpController extends Controller
     public function dump()
     {
         try {
-            // Get database configuration
             $db = config('database.connections.mysql');
 
-            // Create output filename
             $filename = 'dump-' . date('Y-m-d_H-i-s') . '.sql';
             $storagePath = storage_path('app/backups/' . $filename);
 
-            // Ensure directory exists
             if (!file_exists(dirname($storagePath))) {
                 mkdir(dirname($storagePath), 0755, true);
             }
 
-            // Build mysqldump command
-            $process = new Process([
-                'mysqldump',
-                '--user=' . $db['username'],
-                '--password=' . $db['password'],
-                '--host=' . $db['host'],
-                $db['database'],
-                '--result-file=' . $storagePath
-            ]);
+            $command = "mysqldump --user={$db['username']} --password={$db['password']} --host=127.0.0.1 --port=3306 {$db['database']} > {$storagePath}";
+            exec($command, $output, $return_var);
+            \Log::info('MySQL Dump Output: ' . implode("\n", $output));
 
-            // Set process timeout to 5 minutes
-            $process->setTimeout(300);
-            $process->run();
-
-            if (!$process->isSuccessful()) {
-                throw new ProcessFailedException($process);
+            if ($return_var !== 0) {
+                return redirect()->back()->with('error', 'Database dump failed.');
             }
 
-            // Return download response
             return response()->download($storagePath)->deleteFileAfterSend();
 
         } catch (ProcessFailedException $e) {
